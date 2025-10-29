@@ -1,0 +1,42 @@
+
+@startuml
+entity Usuario {
+  * id: bigint <<PK>>
+  --
+  nome: varchar(255)
+  data_nascimento: date
+}
+entity Regra {
+  * id: bigint <<PK>>
+  --
+  nome_regra: varchar(255)
+  date_created: timestamp
+}
+entity UsuarioRegra {
+  * id: bigint <<PK>>
+  --
+  usuario_id: bigint <<FK>>
+  regra_id: bigint <<FK>>
+  date_created: timestamp
+}
+entity Produto {
+  * id: bigint <<PK>>
+  --
+  nome: varchar(255)
+  quantidade_estoque: int
+  preco: decimal(10,2)
+}
+entity Beep {
+  * id: bigint <<PK>>
+  --
+  usuario_id: bigint <<FK>>
+  produto_id: bigint <<FK>>
+  data_hora: timestamp
+  status: varchar(20)
+}
+
+Usuario ||--o{ UsuarioRegra
+Regra ||--o{ UsuarioRegra
+Usuario ||--o{ Beep
+Produto ||--o{ Beep
+@enduml
